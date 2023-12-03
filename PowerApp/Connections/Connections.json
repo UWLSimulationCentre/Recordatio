@@ -47,7 +47,7 @@
       "executionRestrictions": {
         "apiId": "/providers/microsoft.powerapps/apis/shared_bingmaps",
         "appVer": "3.23113.20",
-        "modifiedOn": "2023-12-03 18:18:28",
+        "modifiedOn": "2023-12-03 18:21:59",
         "policy": "{\"type\":\"action\",\"dataSources\":{\"actions\":[\"getlocationbypoint\"]}}",
         "version": 1
       },
