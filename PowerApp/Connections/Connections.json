@@ -1,0 +1,85 @@
+{
+  "4d5b3ff0-f80a-4865-9a5a-c48334448b2c": {
+    "appActions": [
+      "Run"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "bcd7dd3a-919d-4327-be92-a5f5140a9019": {
+          "value": "shared_office365"
+        },
+        "workflowEntityId": {
+          "value": "d9f54b5b-3091-ee11-be37-002248c871a6"
+        },
+        "workflowName": {
+          "value": "1b605338-9821-a6fd-9ac3-1c93bfc82a94"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_office365": {
+          "value": "bcd7dd3a-919d-4327-be92-a5f5140a9019"
+        },
+        "workflowEntityId": {
+          "value": "d9f54b5b-3091-ee11-be37-002248c871a6"
+        },
+        "workflowName": {
+          "value": "1b605338-9821-a6fd-9ac3-1c93bfc82a94"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "SubmitDatatoSimulationCentreTeam"
+    ],
+    "dependencies": {
+      "shared_office365": "bcd7dd3a-919d-4327-be92-a5f5140a9019"
+    },
+    "dependents": [],
+    "id": "4d5b3ff0-f80a-4865-9a5a-c48334448b2c"
+  },
+  "958aae29-ccc6-40d9-88a0-ef8714560494": {
+    "connectionRef": {
+      "displayName": "Bing Maps",
+      "executionRestrictions": {
+        "apiId": "/providers/microsoft.powerapps/apis/shared_bingmaps",
+        "appVer": "3.23113.20",
+        "modifiedOn": "2023-12-03 18:18:28",
+        "policy": "{\"type\":\"action\",\"dataSources\":{\"actions\":[\"getlocationbypoint\"]}}",
+        "version": 1
+      },
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/jayawan/releases/v1.0.1655/1.0.1655.3424/bingmaps/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_bingmaps",
+      "sharedConnectionId": "/providers/microsoft.powerapps/apis/shared_bingmaps/connections/03fcfb946fa641edb4873fffbd9c24e4",
+      "xrmConnectionReferenceLogicalName": "sm_sharedbingmaps_73df1"
+    },
+    "datasets": {},
+    "dataSources": [
+      "BingMaps"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "958aae29-ccc6-40d9-88a0-ef8714560494"
+  },
+  "bcd7dd3a-919d-4327-be92-a5f5140a9019": {
+    "appActions": [],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1664/1.0.1664.3477/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "4d5b3ff0-f80a-4865-9a5a-c48334448b2c"
+    ],
+    "id": "bcd7dd3a-919d-4327-be92-a5f5140a9019"
+  }
+}

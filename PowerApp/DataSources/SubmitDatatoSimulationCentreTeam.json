@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "98b093f2-9a6f-479a-809e-70f96983516b",
+    "Name": "SubmitDatatoSimulationCentreTeam",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "d9f54b5b-3091-ee11-be37-002248c871a6"
+  }
+]

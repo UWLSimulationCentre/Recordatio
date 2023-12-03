@@ -1,0 +1,1923 @@
+"Home As screen.'autoLayout_Sidebar_ver1.0'":
+    LoadingSpinner: =LoadingSpinner.Controls
+
+    ScreenContainer As groupContainer.verticalAutoLayoutContainer:
+        Fill: =RGBA(245, 245, 245, 1)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Stretch
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =16
+        LayoutMode: =LayoutMode.Auto
+        PaddingBottom: =16
+        PaddingLeft: =16
+        PaddingRight: =16
+        PaddingTop: =16
+        Width: =Parent.Width
+        ZIndex: =1
+
+        HeaderContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            FillPortions: =0
+            Height: =75
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            ZIndex: =2
+
+            SimCentreLogo_Left As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =1
+                Image: ='Simulation Centre Logo - Transparent'
+                LayoutMinHeight: =10
+                ZIndex: =1
+
+            HeaderLabel As label:
+                Align: =Align.Center
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =1
+                FontWeight: =FontWeight.Bold
+                Size: =20
+                Text: ="OSCE Recording System"
+                ZIndex: =2
+
+            SimCentreLogo_Right As image:
+                AlignInContainer: =AlignInContainer.Stretch
+                FillPortions: =1
+                Image: ='Simulation Centre Logo - Transparent'
+                LayoutMinHeight: =10
+                ZIndex: =3
+
+        MainContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(245, 245, 245, 1)
+            LayoutAlignItems: =LayoutAlignItems.Stretch
+            LayoutGap: =16
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            PaddingBottom: =2
+            PaddingLeft: =2
+            PaddingRight: =2
+            PaddingTop: =2
+            ZIndex: =3
+
+            MainContainer_Left As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =4
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                ZIndex: =4
+
+                LeftContainer_Timer As timer:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    AutoStart: =true
+                    Duration: =1000
+                    Fill: =If(TimerStatus=true,RGBA(27,184,0,1),RGBA(184,0,0,1))
+                    Height: =150
+                    HoverFill: =If(TimerStatus=true,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                    OnTimerEnd: =Set(varTimeData,Now())
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    Repeat: =true
+                    Size: =30
+                    Start: =TimerStatus
+                    Text: =Text(varTimeData, DateTimeFormat.LongTime)
+                    Width: =500
+                    ZIndex: =1
+
+                LeftContainer_NewSession As button:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    DisplayMode: =If(IsBlank(DateValue1.SelectedDate) || IsBlank(DataCardValue11.Text) || IsBlank(DataCardValue12.Text) || Dropdown1.SelectedText.Value = "Select Site" || Dropdown1_1.SelectedText.Value = "Select Room" || IsBlank(DataCardValue15.Text) , DisplayMode.Disabled, DisplayMode.Edit)
+                    Fill: =RGBA(27,184,0,1)
+                    Height: =51
+                    HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                    OnSelect: |-
+                        =Collect(
+                            Session,
+                            {
+                                Date: DateValue1.SelectedDate,
+                                Group: DataCardValue11.Text,
+                                Tutor: DataCardValue12.Text,
+                                Site: Dropdown1.SelectedText.Value,
+                                Room: Dropdown1_1.SelectedText.Value,
+                                Camera: DataCardValue15.Text,
+                                Confirmed: ""
+                            }
+                        );
+                        ResetForm(LeftContainer_SessionEditForm);
+                        ResetForm(MiddleContainer_StudentEditForm)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: ="NEW SESSION"
+                    Width: =500
+                    ZIndex: =3
+
+                LeftContainer_ResetData As button:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    DisplayMode: =If(RightContainer_StudentGallery.AllItemsCount = 0 && MiddleContainer_SessionGallery.AllItemsCount = 0, DisplayMode.Disabled,DisplayMode.Edit)
+                    Fill: =RGBA(246, 88, 16, 1)
+                    Height: =50
+                    HoverFill: =ColorFade(RGBA(184,0,0,1),-20%)
+                    OnSelect: =Set(ResetPrompt,true);ResetForm(LeftContainer_SessionEditForm);ResetForm(MiddleContainer_StudentEditForm)
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: ="RESET ALL DATA"
+                    Width: =500
+                    ZIndex: =4
+
+                LeftContainer_SessionEditLabel As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    FontWeight: =FontWeight.Bold
+                    Height: =25
+                    Text: ="OSCE Session Details"
+                    Width: =400
+                    ZIndex: =5
+
+                LeftContainer_SessionEditForm As form:
+                    DataSource: =Session
+                    DefaultMode: =FormMode.New
+                    LayoutMinHeight: =250
+                    LayoutMinWidth: =400
+                    NumberOfColumns: =1
+                    Width: =450
+                    ZIndex: =6
+
+                    SessionEditForm_Date As typedDataCard.dateTimeEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Date"
+                        Default: =ThisItem.Date
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Date"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =58
+                        Required: =true
+                        Update: =If(Not IsBlank(DateValue1.SelectedDate), DateValue1.SelectedDate, 0)
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =0
+                        ZIndex: =1
+
+                        DataCardKey11 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =13
+                            ZIndex: =1
+
+                        DateValue1 As datepicker:
+                            AccessibleLabel: ="OSCE Date"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            DisplayMode: =Parent.DisplayMode
+                            EndYear: =Year(Today())+100
+                            InputTextPlaceholder: =If(IsBlank(Self.SelectedDate), Text(Today(), Self.Format, Self.Language))
+                            IsEditable: =true
+                            PaddingBottom: =0
+                            PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                            StartYear: =1899
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey11.X + DataCardKey11.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        StarVisible15_2 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey11.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey11.Y
+                            ZIndex: =3
+
+                        ErrorMessage12_3 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =60
+                            Y: =DataCardValue11.Y + DataCardValue11.Height
+                            ZIndex: =4
+
+                    SessionEditForm_Group As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="OSCE Group"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="OSCE Group"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =true
+                        Update: =DataCardValue11.Text
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =1
+                        ZIndex: =1
+
+                        DataCardKey12 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (DataCardValue11.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        DataCardValue11 As text:
+                            AccessibleLabel: ="OSCE Group"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey12.X + DataCardKey12.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        ErrorMessage12 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue11.Y + DataCardValue11.Height
+                            ZIndex: =3
+
+                        StarVisible12 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey12.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey12.Y
+                            ZIndex: =4
+
+                    SessionEditForm_Tutor As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Tutor"
+                        Default: =User().FullName
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Tutor"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =true
+                        Update: =DataCardValue12.Text
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =2
+                        ZIndex: =1
+
+                        DataCardKey13 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (DataCardValue12.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        DataCardValue12 As text:
+                            AccessibleLabel: ="OSCE Tutor"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =User().FullName
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey13.X + DataCardKey13.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        ErrorMessage13 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue12.Y + DataCardValue12.Height
+                            ZIndex: =3
+
+                        StarVisible13 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey13.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey13.Y
+                            ZIndex: =4
+
+                    SessionEditForm_Site As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Site"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Site"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =true
+                        Update: =
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =3
+                        ZIndex: =1
+
+                        DataCardKey14 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =13
+                            ZIndex: =1
+
+                        ErrorMessage14 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =Dropdown1.Y + Dropdown1.Height
+                            ZIndex: =3
+
+                        StarVisible14 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey14.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey14.Y
+                            ZIndex: =4
+
+                        Dropdown1 As dropdown:
+                            AccessibleLabel: ="OSCE Site"
+                            Default: =If(BingMaps.GetLocationByPoint(Location.Latitude, Location.Longitude).address.formattedAddress in "London","London",If(BingMaps.GetLocationByPoint(Location.Latitude, Location.Longitude).address.formattedAddress in "Reading","Reading","Select Site"))
+                            Items: =["Select Site", "London", "Reading"]
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey15.X + DataCardKey15.Width
+                            Y: =10
+                            ZIndex: =5
+
+                    SessionEditForm_Room As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Room"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Room"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =false
+                        Update: =
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =4
+                        ZIndex: =1
+
+                        DataCardKey15 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (Dropdown1_1.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        ErrorMessage15 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =Dropdown1_1.Y + Dropdown1_1.Height
+                            ZIndex: =3
+
+                        StarVisible15 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey15.Height
+                            Text: ="*"
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey15.Y
+                            ZIndex: =4
+
+                        Dropdown1_1 As dropdown:
+                            AccessibleLabel: ="OSCE Room"
+                            Default: =
+                            DisplayMode: =If(Dropdown1.SelectedText.Value = "Select Site",DisplayMode.Disabled,DisplayMode.Edit)
+                            Items: =If(Dropdown1.SelectedText.Value = "London",["Select Room","PH803","PH804","PH805","PH805C","PH900","PH901","PH902","PH903","PH904","PH905","PH906","PH907","PH909"],["Select Room","CA1","CA2","CA3","WD1","WD2","WD3"])
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey15.X + DataCardKey15.Width
+                            Y: =10
+                            ZIndex: =5
+
+                    SessionEditForm_Camera As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Camera"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Camera"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =true
+                        Update: =DataCardValue15.Text
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =5
+                        ZIndex: =1
+
+                        DataCardKey16 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (DataCardValue15.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        DataCardValue15 As text:
+                            AccessibleLabel: ="OSCE Camera"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey16.X + DataCardKey16.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        ErrorMessage16 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue15.Y + DataCardValue15.Height
+                            ZIndex: =3
+
+                        StarVisible16 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey16.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =8
+                            Y: =DataCardKey16.Y
+                            ZIndex: =4
+
+            MainContainer_Middle As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =4
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =8
+                RadiusBottomRight: =8
+                RadiusTopLeft: =8
+                RadiusTopRight: =8
+                ZIndex: =5
+
+                "MiddleContainer_SessionGallery As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver5.0'":
+                    AccessibleLabel: ="Session Gallery"
+                    DelayItemLoading: =true
+                    FillPortions: =0.4
+                    Items: =Session
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TabIndex: =0
+                    TemplatePadding: =0
+                    TemplateSize: =116
+                    ZIndex: =1
+
+                    SessionGallery_SiteRoomCamera As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Site & " - " & ThisItem.Room & " - " & ThisItem.Camera
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =SessionGallery_GroupTutor.Width
+                        X: =SessionGallery_GroupTutor.X
+                        Y: =SessionGallery_Date.Y + SessionGallery_Date.Height
+                        ZIndex: =1
+
+                    SessionGallery_Date As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Text(DateTimeValue(ThisItem.Date), DateTimeFormat.LongDate)
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =SessionGallery_GroupTutor.Width
+                        X: =SessionGallery_GroupTutor.X
+                        Y: =SessionGallery_GroupTutor.Y + SessionGallery_GroupTutor.Height
+                        ZIndex: =2
+
+                    SessionGallery_GroupTutor As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Group & " (" & ThisItem.Tutor & ")"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.TemplateWidth - 86
+                        X: =16
+                        Y: =(Parent.TemplateHeight - (Self.Size*1.8 + SessionGallery_Date.Size*1.8 + 2 + SessionGallery_SiteRoomCamera.Size*1.8)) / 2
+                        ZIndex: =3
+
+                    SessionGallery_Seperator As rectangle:
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                        ZIndex: =4
+
+                    SessionGallery_Confirm As icon.CheckBadge:
+                        AccessibleLabel: ="Confirm Session Record"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(0, 120, 8, 1)
+                        DisplayMode: =If(ThisItem.Confirmed = "true", DisplayMode.Disabled, DisplayMode.Edit)
+                        Height: =33
+                        Icon: =Icon.CheckBadge
+                        OnSelect: |-
+                            =Patch(Session,First( Filter( Session, Room=MiddleContainer_SessionGallery.Selected.Room ) ), { Confirmed: true} )
+                        TabIndex: =0
+                        Width: =33
+                        X: =382
+                        Y: =68
+                        ZIndex: =5
+
+                    SessionGallery_Edit As icon.Edit:
+                        AccessibleLabel: ="Edit Session Record"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(202, 202, 202, 1)
+                        DisplayMode: =If(ThisItem.Confirmed = "true", DisplayMode.Disabled, DisplayMode.Edit)
+                        Height: =33
+                        Icon: =Icon.Edit
+                        OnSelect: =Select(Parent);Set(EditPopSession,true)
+                        TabIndex: =0
+                        Width: =33
+                        X: =382
+                        Y: =13
+                        ZIndex: =6
+
+                    SessionGallery_Trash As icon.Edit:
+                        AccessibleLabel: ="Delete Session Record"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        Height: =33
+                        Icon: =Icon.Trash
+                        OnSelect: =Select(Parent);Remove(Session,ThisItem)
+                        TabIndex: =0
+                        Width: =33
+                        X: =345
+                        Y: =36
+                        ZIndex: =7
+
+                    SessionGallery_Status As rectangle:
+                        Fill: =If(ThisItem.Confirmed = "true", RGBA(0, 120, 8, 1),RGBA(168,0,0,1))
+                        Height: =Parent.TemplateHeight - SessionGallery_Seperator.Height
+                        OnSelect: =Select(Parent)
+                        Width: =4
+                        ZIndex: =8
+
+                MiddleContainer_TimeControl As groupContainer.manualLayoutContainer:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0.02
+                    LayoutMinHeight: =150
+                    LayoutMinWidth: =250
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =420
+                    ZIndex: =2
+
+                    TimeControl_NewStudent As button:
+                        DisplayMode: =If(MiddleContainer_SessionGallery.AllItemsCount = 0 || IsBlank(DataCardValue11_1.Text) || IsBlank(DataCardValue12_1.Text) || Dropdown2.SelectedText.Value = "Select Level",  DisplayMode.Disabled,DisplayMode.Edit)
+                        Fill: =RGBA(54, 176, 75, 1)
+                        Height: |
+                            =49
+                        HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                        OnSelect: |-
+                            =Collect(
+                                Student,
+                                {
+                                    StudentName: DataCardValue11_1.Text,
+                                    StudentNumber: DataCardValue12_1.Text,
+                                    Level: Dropdown2.SelectedText.Value,
+                                    OSCEStart: "",
+                                    OSCEStop: "",
+                                    DebriefStart: "",
+                                    DebriefStop: "",
+                                    Confirmed: ""
+                                }
+                            );
+                            ResetForm(MiddleContainer_StudentEditForm)
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="NEW STUDENT"
+                        Width: =433
+                        Y: =99
+                        ZIndex: =1
+
+                    SessionEditForm_StopDebrief As button:
+                        DisplayMode: =If(RightContainer_StudentGallery.Selected.DebriefStart = "" || Not(RightContainer_StudentGallery.Selected.DebriefStop = "") ,DisplayMode.Disabled,DisplayMode.Edit)
+                        Fill: =RGBA(184, 0, 0, 0.65)
+                        Height: =50
+                        HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                        OnSelect: |-
+                            =Patch(Student,Last(Student),{DebriefStop:LeftContainer_Timer.Text})
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="STOP DEBRIEF"
+                        Width: =216
+                        X: =217
+                        Y: =50
+                        ZIndex: =2
+
+                    SessionEditForm_StartDebrief As button:
+                        DisplayMode: =If(RightContainer_StudentGallery.Selected.OSCEStop = "" || Not(RightContainer_StudentGallery.Selected.DebriefStart = "") ,DisplayMode.Disabled,DisplayMode.Edit)
+                        Fill: =RGBA(27, 184, 0, 0.66)
+                        Height: =51
+                        HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                        OnSelect: |-
+                            =Patch(Student,Last(Student),{DebriefStart:LeftContainer_Timer.Text})
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Text: ="START DEBRIEF"
+                        Width: =216
+                        Y: =49
+                        ZIndex: =3
+
+                    SessionEditForm_StopOSCE As button:
+                        DisplayMode: =If(RightContainer_StudentGallery.Selected.OSCEStart = "" || Not(RightContainer_StudentGallery.Selected.OSCEStop = ""),DisplayMode.Disabled,DisplayMode.Edit)
+                        Fill: =RGBA(184,0,0,1)
+                        Height: =51
+                        HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                        OnSelect: |-
+                            =Patch(Student,Last(Student),{OSCEStop:LeftContainer_Timer.Text})
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        Text: ="STOP OSCE"
+                        Width: =216
+                        X: =217
+                        Y: =4
+                        ZIndex: =4
+
+                    SessionEditForm_StartOSCE As button:
+                        DisplayMode: =If(RightContainer_StudentGallery.Selected.OSCEStart = "" || RightContainer_StudentGallery.Selected.OSCEStart = "",DisplayMode.Edit,DisplayMode.Disabled)
+                        Fill: =RGBA(27,184,0,1)
+                        Height: =51
+                        HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
+                        OnSelect: |-
+                            =Patch(Student,First( Filter( Student, StudentNumber=RightContainer_StudentGallery.Selected.StudentNumber ) ), { OSCEStart: LeftContainer_Timer.Text} )
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopRight: =0
+                        Text: ="START OSCE"
+                        Width: =216
+                        Y: =4
+                        ZIndex: =5
+
+                MiddleContainer_StudentEditLabel As label:
+                    Align: =Align.Center
+                    AlignInContainer: =AlignInContainer.Stretch
+                    FontWeight: =FontWeight.Bold
+                    Height: =25
+                    Text: ="Student Details"
+                    ZIndex: =3
+
+                MiddleContainer_StudentEditForm As form:
+                    DataSource: =Session
+                    DefaultMode: =FormMode.New
+                    LayoutMinHeight: =200
+                    LayoutMinWidth: =400
+                    NumberOfColumns: =1
+                    Width: =450
+                    ZIndex: =4
+
+                    StudentEditForm_Name As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Name"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Name"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =false
+                        Update: =DataCardValue11_1.Text
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =0
+                        ZIndex: =1
+
+                        DataCardKey12_1 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (DataCardValue11_1.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        DataCardValue11_1 As text:
+                            AccessibleLabel: ="Student Name"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =
+                            DelayOutput: =true
+                            DisplayMode: =If(IsBlank(MiddleContainer_SessionGallery.Selected.Date),DisplayMode.Disabled,DisplayMode.Edit)
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Reset: =true
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey12_1.X + DataCardKey12_1.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        ErrorMessage12_1 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue11_1.Y + DataCardValue11_1.Height
+                            ZIndex: =3
+
+                        StarVisible12_1 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey12_1.Height
+                            Text: ="*"
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey12_1.Y
+                            ZIndex: =4
+
+                    StudentEditForm_Number As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Number"
+                        Default: =User().FullName
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Number"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        MaxLength: =100
+                        Required: =false
+                        Update: =DataCardValue12_1.Text
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =1
+                        ZIndex: =1
+
+                        DataCardKey13_1 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10 + (DataCardValue12_1.Height / 2) - (Self.Height / 2)
+                            ZIndex: =1
+
+                        DataCardValue12_1 As text:
+                            AccessibleLabel: ="Student Number"
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =
+                            DelayOutput: =true
+                            DisplayMode: =If(IsBlank(MiddleContainer_SessionGallery.Selected.Date),DisplayMode.Disabled,DisplayMode.Edit)
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Reset: =true
+                            Tooltip: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey13_1.X + DataCardKey13_1.Width
+                            Y: =10
+                            ZIndex: =2
+
+                        ErrorMessage13_1 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue12_1.Y + DataCardValue12_1.Height
+                            ZIndex: =3
+
+                        StarVisible13_1 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey13_1.Height
+                            Text: ="*"
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey13_1.Y
+                            ZIndex: =4
+
+                    StudentEditForm_Level As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Level"
+                        Default: =
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: ="Level"
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =61
+                        MaxLength: =100
+                        Required: =false
+                        Update: =Dropdown2.SelectedText.Value
+                        Width: =450
+                        WidthFit: =true
+                        X: =0
+                        Y: =2
+                        ZIndex: =1
+
+                        DataCardKey16_1 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =(Parent.Width - 60) * 0.4
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        ErrorMessage16_1 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =Dropdown2.Y + Dropdown2.Height
+                            ZIndex: =3
+
+                        StarVisible16_1 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(255, 0, 0, 1)
+                            Height: =DataCardKey16_1.Height
+                            Text: ="*"
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey16_1.Y
+                            ZIndex: =4
+
+                        Dropdown2 As dropdown:
+                            AccessibleLabel: ="Student Level"
+                            Default: ="Select Level"
+                            DisplayMode: =If(IsBlank(MiddleContainer_SessionGallery.Selected.Date),DisplayMode.Disabled,DisplayMode.Edit)
+                            Items: =["Select Level","Level 4","Level 5","Level 6","Level 7"]
+                            Width: =(Parent.Width - 60) * 0.6
+                            X: =DataCardKey16_1.X + DataCardKey16_1.Width
+                            Y: =8
+                            ZIndex: =5
+
+            MainContainer_Right As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                FillPortions: =4
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =6
+
+                "RightContainer_StudentGallery As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver5.0'":
+                    AccessibleLabel: ="Student Gallery"
+                    Default: =Last(Student)
+                    DelayItemLoading: =true
+                    Items: =Student
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TabIndex: =0
+                    TemplatePadding: =0
+                    TemplateSize: =116
+                    Width: =500
+                    ZIndex: =1
+
+                    StudentGallery_Seperator As rectangle:
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - Self.Height
+                        ZIndex: =1
+
+                    StudentGallery_DebriefDetails As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =If(IsBlank(ThisItem.DebriefStart), "Debrief - ", "Debrief - Start: " & ThisItem.DebriefStart & " | End: " & ThisItem.DebriefStop)
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =StudentGallery_NameNumberLevel.Width
+                        X: =StudentGallery_NameNumberLevel.X
+                        Y: =StudentGallery_OSCEDetails.Y + StudentGallery_OSCEDetails.Height
+                        ZIndex: =2
+
+                    StudentGallery_OSCEDetails As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =If(IsBlank(ThisItem.OSCEStart), "OSCE - ", "OSCE - Start: " & ThisItem.OSCEStart & " | End: " & ThisItem.OSCEStop)
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =StudentGallery_NameNumberLevel.Width
+                        X: =StudentGallery_NameNumberLevel.X
+                        Y: =StudentGallery_NameNumberLevel.Y + StudentGallery_NameNumberLevel.Height
+                        ZIndex: =3
+
+                    StudentGallery_NameNumberLevel As label:
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                        Height: =Self.Size * 1.8
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.StudentName & " (" & ThisItem.StudentNumber & ")" & " [" & ThisItem.Level & "]"
+                        VerticalAlign: =VerticalAlign.Top
+                        Width: =Parent.TemplateWidth - 86
+                        X: =16
+                        Y: =(Parent.TemplateHeight - (Self.Size*1.8 + StudentGallery_OSCEDetails.Size*1.8 + 2 + StudentGallery_DebriefDetails.Size*1.8)) / 2
+                        ZIndex: =4
+
+                    StudentGallery_Confirm As icon.CheckBadge:
+                        AccessibleLabel: ="Confirm Student"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(0, 120, 8, 1)
+                        DisplayMode: =If(ThisItem.Confirmed = "true", DisplayMode.Disabled, DisplayMode.Edit)
+                        Height: =33
+                        Icon: =Icon.CheckBadge
+                        OnSelect: |-
+                            =Patch(Student,First( Filter( Student, StudentNumber=RightContainer_StudentGallery.Selected.StudentNumber ) ), { Confirmed: true} )
+                        TabIndex: =0
+                        Width: =33
+                        X: =382
+                        Y: =68
+                        ZIndex: =5
+
+                    StudentGallery_Edit As icon.Edit:
+                        AccessibleLabel: ="Edit Student"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(202, 202, 202, 1)
+                        DisplayMode: =If(ThisItem.Confirmed = "true", DisplayMode.Disabled, DisplayMode.Edit)
+                        Height: =33
+                        Icon: =Icon.Edit
+                        OnSelect: =Select(Parent);Set(EditPopStudent,true)
+                        TabIndex: =0
+                        Width: =33
+                        X: =382
+                        Y: =13
+                        ZIndex: =6
+
+                    StudentGallery_Trash As icon.Edit:
+                        AccessibleLabel: ="Remove Student Record"
+                        Color: =RGBA(56, 96, 178, 1)
+                        DisabledColor: =RGBA(166, 166, 166, 1)
+                        Height: =33
+                        Icon: =Icon.Trash
+                        OnSelect: =Select(Parent);Remove(Student,ThisItem)
+                        TabIndex: =0
+                        Width: =33
+                        X: =345
+                        Y: =36
+                        ZIndex: =7
+
+                    StudentGallery_Status As rectangle:
+                        Fill: =If(ThisItem.Confirmed = "true", RGBA(0, 120, 8, 1),RGBA(168,0,0,1))
+                        Height: =Parent.TemplateHeight - StudentGallery_Seperator.Height
+                        OnSelect: =Select(Parent)
+                        Width: =4
+                        ZIndex: =8
+
+                RightContainer_SubmitData As button:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    DisplayMode: =If(MiddleContainer_SessionGallery.AllItemsCount = 0, DisplayMode.Disabled, DisplayMode.Edit)
+                    Height: =50
+                    OnSelect: =SubmitDatatoSimulationCentreTeam.Run(JSON(Session,JSONFormat.IgnoreBinaryData & JSONFormat.IgnoreUnsupportedTypes),JSON(Student,JSONFormat.IgnoreBinaryData & JSONFormat.IgnoreUnsupportedTypes))
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: ="SUBMIT DATA TO SIM TEAM"
+                    ZIndex: =3
+
+    ResetDataPromptPopUp As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(253, 222, 207, 1)
+        Visible: =ResetPrompt
+        X: =433
+        Y: =284
+        ZIndex: =2
+
+        ResetDataPopUp_Cancel As icon.CheckBadge:
+            AccessibleLabel: ="Cancel Data Reset"
+            Color: =RGBA(255, 0, 0, 1)
+            Icon: =Icon.CancelBadge
+            OnSelect: |-
+                =Set(ResetPrompt,false);Notify("NOTE: No Data has been Changed",NotificationType.Information,3000)
+            TabIndex: =0
+            X: =282
+            Y: =128
+            ZIndex: =1
+
+        ResetDataPopUp_Check As icon.CheckBadge:
+            AccessibleLabel: ="Confirm Data Reset"
+            Color: =RGBA(54, 176, 75, 1)
+            Icon: =Icon.CheckBadge
+            OnSelect: |-
+                =Set(TimerStatus,false);Clear(Session);Clear(Student);Set(ResetPrompt,false);Notify("SUCCESS: All Data has been reset",NotificationType.Success,3000)
+            TabIndex: =0
+            X: =154
+            Y: =128
+            ZIndex: =2
+
+        ResetDataPopUp_Detail As label:
+            Align: =Align.Center
+            Height: =39
+            Text: ="THIS WILL REMOVE ALL SESSION DETAILS AND STUDENT DETAILS YOU CAN SEE ON SCREEN"
+            Width: =500
+            Y: =81
+            ZIndex: =3
+
+        ResetDataPopUp_Confirmation As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="ARE YOU SURE?"
+            Width: =500
+            Y: =40
+            ZIndex: =4
+
+        ResetDataPopUp_Label As label:
+            Align: =Align.Center
+            Color: =RGBA(168, 0, 0, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Size: =20
+            Text: ="RESETTING ALL DATA"
+            Width: =500
+            Y: =1
+            ZIndex: =5
+
+    StudentEditPromptPopUp As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(253, 222, 207, 1)
+        Height: =491
+        Visible: =EditPopStudent
+        X: =433
+        Y: =138
+        ZIndex: =3
+
+        StudentPopUpForm_Cancel As icon.CheckBadge:
+            AccessibleLabel: ="Cancel Student Edit"
+            Color: =RGBA(255, 0, 0, 1)
+            Icon: =Icon.CancelBadge
+            OnSelect: |-
+                =Set(EditPopStudent,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000)
+            TabIndex: =0
+            X: =282
+            Y: =416
+            ZIndex: =1
+
+        StudentPopUpForm_Check As icon.CheckBadge:
+            AccessibleLabel: ="Confirm Student Edit"
+            Color: =RGBA(54, 176, 75, 1)
+            Icon: =Icon.CheckBadge
+            OnSelect: |-
+                =SubmitForm(StudentPopUpForm);
+                Set(
+                    EditPopStudent,
+                    false
+                );
+                Notify(
+                    "SUCCESS: All Data has been reset",
+                    NotificationType.Success,
+                    3000
+                )
+            TabIndex: =0
+            X: =154
+            Y: =416
+            ZIndex: =2
+
+        StudentPopUpForm As form:
+            DataSource: =Student
+            Height: =369
+            Item: =RightContainer_StudentGallery.Selected
+            NumberOfColumns: =1
+            Width: =500
+            Y: =40
+            ZIndex: =3
+
+            StudentPopUpForm_Name As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="StudentName"
+                Default: =ThisItem.StudentName
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Student Name"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =DataCardValue1.Text
+                Width: =500
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: ="Name"
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =8
+                    ZIndex: =1
+
+                DataCardValue1 As text:
+                    AccessibleLabel: ="Session Date"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey1.X + DataCardKey1.Width
+                    Y: =8
+                    ZIndex: =2
+
+                ErrorMessage1 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue1.Y + DataCardValue1.Height
+                    ZIndex: =3
+
+                StarVisible1 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey1.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey1.Y
+                    ZIndex: =4
+
+            StudentPopUpForm_Number As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="StudentNumber"
+                Default: =ThisItem.StudentNumber
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Student Number"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =DataCardValue2.Text
+                Width: =500
+                X: =0
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey2 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: ="Number"
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue2 As text:
+                    AccessibleLabel: ="Edit Student Number"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey2.X + DataCardKey2.Width
+                    ZIndex: =2
+
+                ErrorMessage2 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue2.Y + DataCardValue2.Height
+                    ZIndex: =3
+
+                StarVisible2 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey2.Y
+                    ZIndex: =4
+
+            StudentPopUpForm_Level As typedDataCard.allowedValuesStringEditCard:
+                AllowedValues: =
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Level"
+                Default: =ThisItem.Level
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Level"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =false
+                Update: =DataCardValue4.Selected.Value
+                Width: =500
+                X: =0
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey8 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: ="Level"
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    ZIndex: =1
+
+                DataCardValue4 As dropdown:
+                    AccessibleLabel: ="Edit Student Level"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DisplayMode: =Parent.DisplayMode
+                    Items: =["Select Level","Level 4","Level 5","Level 6","Level 7"]
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey8.X + DataCardKey8.Width
+                    ZIndex: =2
+
+                ErrorMessage8 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue4.Y + DataCardValue4.Height
+                    ZIndex: =3
+
+                StarVisible8 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey8.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey8.Y
+                    ZIndex: =4
+
+        StudentPopUpForm_Label As label:
+            Align: =Align.Center
+            Color: =RGBA(168, 0, 0, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Size: =20
+            Text: ="EDIT STUDENT RECORD"
+            Width: =500
+            Y: =1
+            ZIndex: =4
+
+    SessionEditPromptPopUp As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(253, 222, 207, 1)
+        Height: =491
+        Visible: =EditPopSession
+        X: =433
+        Y: =138
+        ZIndex: =4
+
+        SessionPopUpForm_Cancel As icon.CheckBadge:
+            AccessibleLabel: ="Cancel Session Edit"
+            Color: =RGBA(255, 0, 0, 1)
+            Icon: =Icon.CancelBadge
+            OnSelect: |-
+                =Set(EditPopSession,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000)
+            TabIndex: =0
+            X: =282
+            Y: =416
+            ZIndex: =1
+
+        SessionPopUpForm_Check As icon.CheckBadge:
+            AccessibleLabel: ="Confirm Session Edit"
+            Color: =RGBA(54, 176, 75, 1)
+            Icon: =Icon.CheckBadge
+            OnSelect: |-
+                =Patch(Session,MiddleContainer_SessionGallery.Selected,{Date: DateValue1_1.SelectedDate, Group: DataCardValue11_2.Text, Tutor: DataCardValue12_2.Text, Site: Dropdown1_2.SelectedText.Value, Room: Dropdown1_3.SelectedText.Value, Camera: DataCardValue15_1.Text});
+                Set(
+                    EditPopSession,
+                    false
+                );
+                Notify(
+                    "SUCCESS: All Data has been reset",
+                    NotificationType.Success,
+                    3000
+                )
+            TabIndex: =0
+            X: =154
+            Y: =416
+            ZIndex: =2
+
+        SessionPopUpForm As form:
+            DataSource: =Session
+            Height: =363
+            Item: =MiddleContainer_SessionGallery.Selected
+            NumberOfColumns: =1
+            Width: =500
+            Y: =40
+            ZIndex: =3
+
+            SessionPopUpForm_Date As typedDataCard.dateTimeEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Date
+                Default: =ThisItem.Date
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Session],DataSourceInfo.DisplayName,"Date")
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =58
+                Required: =false
+                Update: =If(Not IsBlank(DateValue1_1.SelectedDate), DateValue1_1.SelectedDate, 0)
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey11_1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =13
+                    ZIndex: =1
+
+                DateValue1_1 As datepicker:
+                    AccessibleLabel: ="Edit Session Date"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultDate: =MiddleContainer_SessionGallery.Selected.Date
+                    DisplayMode: =Parent.DisplayMode
+                    EndYear: =Year(Today())+100
+                    InputTextPlaceholder: =If(IsBlank(Self.SelectedDate), Text(Today(), Self.Format, Self.Language))
+                    IsEditable: =true
+                    PaddingBottom: =0
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    StartYear: =1899
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey11_1.X + DataCardKey11_1.Width
+                    Y: =10
+                    ZIndex: =2
+
+            SessionPopUpForm_OSCE As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Group
+                Default: =
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="OSCE Group"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =DataCardValue11_2.Text
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =1
+                ZIndex: =1
+
+                DataCardKey12_2 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (DataCardValue11_2.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                DataCardValue11_2 As text:
+                    AccessibleLabel: |-
+                        ="Edit OSCE Group
+                        "
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =MiddleContainer_SessionGallery.Selected.Group
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey12_2.X + DataCardKey12_2.Width
+                    Y: =10
+                    ZIndex: =2
+
+                ErrorMessage12_2 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue11_2.Y + DataCardValue11_2.Height
+                    ZIndex: =3
+
+                StarVisible12_2 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey12_2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey12_2.Y
+                    ZIndex: =4
+
+            SessionPopUpForm_Tutor As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Tutor
+                Default: =User().FullName
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Tutor"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =DataCardValue12_2.Text
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =2
+                ZIndex: =1
+
+                DataCardKey13_2 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (DataCardValue12_2.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                DataCardValue12_2 As text:
+                    AccessibleLabel: ="Edit Session Tutor"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =MiddleContainer_SessionGallery.Selected.Tutor
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey13_2.X + DataCardKey13_2.Width
+                    Y: =10
+                    ZIndex: =2
+
+                ErrorMessage13_2 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue12_2.Y + DataCardValue12_2.Height
+                    ZIndex: =3
+
+                StarVisible13_2 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey13_2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey13_2.Y
+                    ZIndex: =4
+
+            SessionPopUpForm_Site As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Site
+                Default: =
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Site"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey14_1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (Dropdown1_2.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                ErrorMessage14_1 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =Dropdown1_2.Y + Dropdown1_2.Height
+                    ZIndex: =3
+
+                StarVisible14_1 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey14_1.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey14_1.Y
+                    ZIndex: =4
+
+                Dropdown1_2 As dropdown:
+                    AccessibleLabel: ="Session Site"
+                    Default: =MiddleContainer_SessionGallery.Selected.Site
+                    Items: =["Select Site", "London", "Reading"]
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =211.2
+                    Y: =10
+                    ZIndex: =5
+
+            SessionPopUpForm_Room As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Room
+                Default: =
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Room"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =4
+                ZIndex: =1
+
+                DataCardKey15_1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (Dropdown1_3.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                ErrorMessage15_1 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =Dropdown1_3.Y + Dropdown1_3.Height
+                    ZIndex: =3
+
+                StarVisible15_1 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey15_1.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey15_1.Y
+                    ZIndex: =4
+
+                Dropdown1_3 As dropdown:
+                    AccessibleLabel: ="Session Room"
+                    Default: =MiddleContainer_SessionGallery.Selected.Room
+                    DisplayMode: =If(Dropdown1_2.SelectedText.Value = "Select Site",DisplayMode.Disabled,DisplayMode.Edit)
+                    Items: =If(Dropdown1_2.SelectedText.Value = "London",["Select Room","PH803","PH804","PH805","PH805C","PH900","PH901","PH902","PH903","PH904","PH905","PH906","PH907","PH909"],["Select Room","CA1","CA2","CA3","WD1","WD2","WD3"])
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey15_1.X + DataCardKey15_1.Width
+                    Y: =10
+                    ZIndex: =5
+
+            SessionPopUpForm_Camera As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: =ThisItem.Camera
+                Default: =
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: ="Camera"
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =100
+                Required: =false
+                Update: =DataCardValue15_1.Text
+                Width: =0
+                WidthFit: =true
+                X: =0
+                Y: =5
+                ZIndex: =1
+
+                DataCardKey16_2 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (DataCardValue15_1.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                DataCardValue15_1 As text:
+                    AccessibleLabel: ="Session Camera"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =MiddleContainer_SessionGallery.Selected.Camera
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.6
+                    X: =DataCardKey16_2.X + DataCardKey16_2.Width
+                    Y: =10
+                    ZIndex: =2
+
+                ErrorMessage16_2 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue15_1.Y + DataCardValue15_1.Height
+                    ZIndex: =3
+
+                StarVisible16_2 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey16_2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey16_2.Y
+                    ZIndex: =4
+
+        SessionPopUpForm_Label As label:
+            Align: =Align.Center
+            Color: =RGBA(168, 0, 0, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Size: =20
+            Text: ="EDIT SESSION RECORD"
+            Width: =500
+            Y: =1
+            ZIndex: =4
+
+    Label1 As label:
+        Text: =Location.Latitude
+        X: =586
+        Y: =284
+        ZIndex: =5
+
+    Label1_1 As label:
+        Text: =Location.Longitude
+        X: =608
+        Y: =324
+        ZIndex: =6
+
