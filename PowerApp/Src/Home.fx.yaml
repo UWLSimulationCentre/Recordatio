@@ -743,7 +743,7 @@
                         Height: =50
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,Last(Student),{DebriefStop:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStop:LeftContainer_Timer.Text})
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -760,7 +760,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,Last(Student),{DebriefStart:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStart:LeftContainer_Timer.Text})
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -776,7 +776,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,Last(Student),{OSCEStop:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{OSCEStop:LeftContainer_Timer.Text})
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -792,7 +792,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,First( Filter( Student, StudentNumber=RightContainer_StudentGallery.Selected.StudentNumber ) ), { OSCEStart: LeftContainer_Timer.Text} )
+                            =Patch(Student,RightContainer_StudentGallery.Selected, { OSCEStart: LeftContainer_Timer.Text} )
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopRight: =0
