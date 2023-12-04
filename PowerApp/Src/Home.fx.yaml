@@ -1909,11 +1909,3 @@
             Y: =1
             ZIndex: =4
 
-    Button3 As button:
-        OnSelect: |-
-            =Patch(Student,RightContainer_StudentGallery.Selected, { OSCEStart: ""} )
-        Text: ="Button"
-        X: =583
-        Y: =284
-        ZIndex: =5
-
