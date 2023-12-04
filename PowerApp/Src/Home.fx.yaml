@@ -117,7 +117,8 @@
                             }
                         );
                         ResetForm(LeftContainer_SessionEditForm);
-                        ResetForm(MiddleContainer_StudentEditForm)
+                        ResetForm(MiddleContainer_StudentEditForm);SaveData(Session,"SessionData");
+                        SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                     RadiusBottomLeft: =0
                     RadiusBottomRight: =0
                     RadiusTopLeft: =0
@@ -729,7 +730,7 @@
                                     Confirmed: ""
                                 }
                             );
-                            ResetForm(MiddleContainer_StudentEditForm)
+                            ResetForm(MiddleContainer_StudentEditForm);SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                         RadiusTopLeft: =0
                         RadiusTopRight: =0
                         Text: ="NEW STUDENT"
@@ -743,7 +744,7 @@
                         Height: =50
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStop:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStop:LeftContainer_Timer.Text});SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -760,7 +761,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStart:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{DebriefStart:LeftContainer_Timer.Text});SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -776,7 +777,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,RightContainer_StudentGallery.Selected,{OSCEStop:LeftContainer_Timer.Text})
+                            =Patch(Student,RightContainer_StudentGallery.Selected,{OSCEStop:LeftContainer_Timer.Text});SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopLeft: =0
@@ -792,7 +793,7 @@
                         Height: =51
                         HoverFill: =If(TimerStatus=false,ColorFade(RGBA(27,184,0,1),-20%),ColorFade(RGBA(184,0,0,1),-20%))
                         OnSelect: |-
-                            =Patch(Student,RightContainer_StudentGallery.Selected, { OSCEStart: LeftContainer_Timer.Text} )
+                            =Patch(Student,RightContainer_StudentGallery.Selected, { OSCEStart: LeftContainer_Timer.Text} );SaveData(Session,"SessionData");SaveData(Student,"StudentData")
                         RadiusBottomLeft: =0
                         RadiusBottomRight: =0
                         RadiusTopRight: =0
@@ -1230,7 +1231,7 @@
             Color: =RGBA(255, 0, 0, 1)
             Icon: =Icon.CancelBadge
             OnSelect: |-
-                =Set(EditPopStudent,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000)
+                =Set(EditPopStudent,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000);SaveData(Session,"SessionData");SaveData(Student,"StudentData")
             TabIndex: =0
             X: =282
             Y: =416
@@ -1250,7 +1251,7 @@
                     "SUCCESS: All Data has been reset",
                     NotificationType.Success,
                     3000
-                )
+                );SaveData(Session,"SessionData");SaveData(Student,"StudentData")
             TabIndex: =0
             X: =154
             Y: =416
@@ -1754,7 +1755,7 @@
             Color: =RGBA(255, 0, 0, 1)
             Icon: =Icon.CancelBadge
             OnSelect: |-
-                =Set(EditPopSession,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000)
+                =Set(EditPopSession,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000);SaveData(Session,"SessionData");SaveData(Student,"StudentData")
             TabIndex: =0
             X: =282
             Y: =416
@@ -1774,7 +1775,7 @@
                     "SUCCESS: All Data has been reset",
                     NotificationType.Success,
                     3000
-                )
+                );SaveData(Session,"SessionData");SaveData(Student,"StudentData")
             TabIndex: =0
             X: =154
             Y: =416
