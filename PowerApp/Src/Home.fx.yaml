@@ -1754,8 +1754,8 @@
             AccessibleLabel: ="Cancel Session Edit"
             Color: =RGBA(255, 0, 0, 1)
             Icon: =Icon.CancelBadge
-            OnSelect: |-
-                =Set(EditPopSession,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000);SaveData(Session,"SessionData");SaveData(Student,"StudentData")
+            OnSelect: |
+                =Set(EditPopSession,false);Notify("NOTE: No Data has been Edited",NotificationType.Information,3000);SaveData(Session,"SessionData");SaveData(Student,"StudentData");
             TabIndex: =0
             X: =282
             Y: =416

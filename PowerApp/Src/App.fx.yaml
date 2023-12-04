@@ -2,7 +2,7 @@ App As appinfo:
     BackEnabled: =true
     ConfirmExit: =true
     ConfirmExitMessage: ="If you close this application, all data will be lost and not recoverable."
-    OnStart: =
+    OnStart: =LoadData(Student,"StudentData",true);LoadData(Session,"SessionData",true)
     StartScreen: =Home
     Theme: =PowerAppsTheme
 
