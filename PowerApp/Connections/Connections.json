@@ -41,13 +41,35 @@
     "dependents": [],
     "id": "4d5b3ff0-f80a-4865-9a5a-c48334448b2c"
   },
+  "7f35a5cd-11c4-4ae5-bda0-60e569f47bd9": {
+    "connectionRef": {
+      "displayName": "Excel Online (Business)",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1658/1.0.1658.3452/excelonlinebusiness/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_excelonlinebusiness"
+    },
+    "datasets": {
+      "me,b%2521SB96o1UCQ06ytbDVdpYpJFNPwpTgZM5GgZFP_8UICRYacId5nD3qSL1rKEQos1-Y,01PI6ACEWIYOBICO27NNAYWL7RQWJPYGSQ": {
+        "dataSources": {
+          "Table2": {
+            "tableName": "{FA577E27-83DB-436E-892E-CDFF8781A186}"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Table2"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "7f35a5cd-11c4-4ae5-bda0-60e569f47bd9"
+  },
   "958aae29-ccc6-40d9-88a0-ef8714560494": {
     "connectionRef": {
       "displayName": "Bing Maps",
       "executionRestrictions": {
         "apiId": "/providers/microsoft.powerapps/apis/shared_bingmaps",
         "appVer": "3.23113.20",
-        "modifiedOn": "2023-12-04 12:11:28",
+        "modifiedOn": "2023-12-04 19:21:20",
         "policy": "{\"type\":\"action\",\"dataSources\":{\"actions\":[\"getlocationbypoint\"]}}",
         "version": 1
       },

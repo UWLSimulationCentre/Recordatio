@@ -38,6 +38,126 @@
           },
           "ruleId": "acc-AutostartShouldBeOff",
           "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEStart_DataCard5.DataCardValue5.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEStart_DataCard5.DataCardValue5.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEStart_DataCard5.DataCardValue5"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEEnd_DataCard3.DataCardValue6.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEEnd_DataCard3.DataCardValue6.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.StudentEditPromptPopUp.StudentPopUpForm.OSCEEnd_DataCard3.DataCardValue6"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefStart_DataCard3.DataCardValue7.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefStart_DataCard3.DataCardValue7.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefStart_DataCard3.DataCardValue7"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefEnd_DataCard3.DataCardValue8.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefEnd_DataCard3.DataCardValue8.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "Home",
+                "type": "Home.StudentEditPromptPopUp.StudentPopUpForm.DebriefEnd_DataCard3.DataCardValue8"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
         }
       ],
       "tool": {
@@ -60,6 +180,23 @@
                 "level": "Medium",
                 "primaryCategory": "accessibility",
                 "whyFix": "Autostart of video and audio files can be distracting. Let users choose whether to play or not."
+              }
+            },
+            {
+              "id": "acc-AccessibleLabelNeeded",
+              "messageStrings": {
+                "issue": {
+                  "text": "Missing accessible label"
+                }
+              },
+              "properties": {
+                "componentType": "app",
+                "howToFix": [
+                  "Edit the accessible label property to describe the item."
+                ],
+                "level": "Medium",
+                "primaryCategory": "accessibility",
+                "whyFix": "If there's no accessible text, people who can’t see the screen won't understand what’s in images and controls."
               }
             }
           ],
