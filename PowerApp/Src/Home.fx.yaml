@@ -426,7 +426,7 @@
 
                         Dropdown1 As dropdown:
                             AccessibleLabel: ="OSCE Site"
-                            Default: =If(BingMaps.GetLocationByPoint(Location.Latitude, Location.Longitude).address.formattedAddress in "London","London",If(BingMaps.GetLocationByPoint(Location.Latitude, Location.Longitude).address.formattedAddress in "Reading","Reading","Select Site"))
+                            Default: ="Select Site"
                             Items: =["Select Site", "London", "Reading"]
                             Width: =(Parent.Width - 60) * 0.6
                             X: =DataCardKey15.X + DataCardKey15.Width
@@ -1467,10 +1467,10 @@
                 DataField: ="OSCEStart"
                 Default: =ThisItem.OSCEStart
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@Table2],DataSourceInfo.DisplayName,"OSCEStart")
+                DisplayName: =DataSourceInfo([@Student],DataSourceInfo.DisplayName,"OSCEStart")
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@Table2], DataSourceInfo.MaxLength, "OSCEStart")
+                MaxLength: =DataSourceInfo([@Student], DataSourceInfo.MaxLength, "OSCEStart")
                 Required: =false
                 Update: =DataCardValue5.Text
                 Width: =500
@@ -1537,7 +1537,7 @@
                 DisplayName: =DataSourceInfo([@Student],DataSourceInfo.DisplayName,"OSCEStop")
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@Table2], DataSourceInfo.MaxLength, "OSCEEnd")
+                MaxLength: =DataSourceInfo([@Student], DataSourceInfo.MaxLength, "OSCEStop")
                 Required: =false
                 Update: =DataCardValue6.Text
                 Width: =500
@@ -1601,10 +1601,10 @@
                 DataField: ="DebriefStart"
                 Default: =ThisItem.DebriefStart
                 DisplayMode: =Parent.DisplayMode
-                DisplayName: =DataSourceInfo([@Table2],DataSourceInfo.DisplayName,"DebriefStart")
+                DisplayName: =DataSourceInfo([@Student],DataSourceInfo.DisplayName,"DebriefStart")
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@Table2], DataSourceInfo.MaxLength, "DebriefStart")
+                MaxLength: =DataSourceInfo([@Student], DataSourceInfo.MaxLength, "DebriefStart")
                 Required: =false
                 Update: =DataCardValue7.Text
                 Width: =500
@@ -1671,7 +1671,7 @@
                 DisplayName: =DataSourceInfo([@Student],DataSourceInfo.DisplayName,"DebriefStop")
                 Fill: =RGBA(0, 0, 0, 0)
                 Height: =50
-                MaxLength: =DataSourceInfo([@Table2], DataSourceInfo.MaxLength, "DebriefEnd")
+                MaxLength: =DataSourceInfo([@Student], DataSourceInfo.MaxLength, "DebriefStop")
                 Required: =false
                 Update: =DataCardValue8.Text
                 Width: =500

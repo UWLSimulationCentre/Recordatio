@@ -1,8 +1,0 @@
-[
-  {
-    "ApiId": "/providers/microsoft.powerapps/apis/shared_bingmaps",
-    "Name": "BingMaps",
-    "ServiceKind": "ConnectedWadl",
-    "Type": "ServiceInfo"
-  }
-]
