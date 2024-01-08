@@ -4,7 +4,7 @@
 ![](https://img.shields.io/github/issues/UWLSimulationCentre/Recordatio) 
 
 
-# Disciplulus Hub PowerApp Mobile App
+# Recordatio PowerApp
 
 From Latin, *Recordatio* translates to ***Recording***. This mobile application provides staff watching OSCE Exams within our [Simulation Centres](https://www.uwl.ac.uk/business/university-venue-hire/medical-simulation-centre), a system to mark timings and camera details to allow Technicians an easier method of editing and reviewing following the exams.
 
